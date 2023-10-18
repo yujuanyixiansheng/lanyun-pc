@@ -1,5 +1,5 @@
 <template>
-  <div class="reg">Reg</div>
+  <div class="login">login</div>
 </template>
 
 <script setup lang="ts"></script>
