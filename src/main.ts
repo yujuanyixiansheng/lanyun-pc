@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
 import '@/assets/styles/cyc.scss'
+import 'element-plus/dist/index.css'
 
 // svg需要配置的代码
 import 'virtual:svg-icons-register'

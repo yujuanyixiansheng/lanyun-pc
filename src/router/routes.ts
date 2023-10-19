@@ -1,6 +1,8 @@
 //对外暴露配置路由
 import { RouteRecordRaw } from 'vue-router'
 export const constantRoute: Array<RouteRecordRaw> = [
+  // 重定向首页
+  { path: '/', redirect: '/home' },
   {
     path: '/login',
     component: () => import('@/pages/login.vue'),
@@ -8,12 +10,17 @@ export const constantRoute: Array<RouteRecordRaw> = [
   },
   {
     path: '/',
-    component: () => import('@/pages/layout.vue'),
+    component: () => import('@/pages/layout/index.vue'),
     name: 'layout',
     meta: {
       title: 'layout',
       hidden: false,
       icon: 'Avatar',
+      // children:[
+      //   path: '/home',
+      //   component: () => import('@/pages/layout/index.vue'),
+      //   name: 'layout',
+      // ]
       // children: [
       //   {
       //     path: '/task/psychologyTask',
@@ -37,6 +44,13 @@ export const constantRoute: Array<RouteRecordRaw> = [
       //   },
       // ],
     },
+    children: [
+      {
+        path: 'home',
+        name: 'home',
+        component: () => import('../pages/schoolHome.vue'),
+      },
+    ],
   },
 ]
 
