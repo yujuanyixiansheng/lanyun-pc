@@ -6,7 +6,7 @@
         <svg style="width: 30px; height: 30px">
           <use xlink:href="#icon-fold" fill="#fff"></use>
         </svg>
-        <div class="title">心理健康教育平台</div>
+        <span class="title">心理健康教育平台</span>
       </div>
       <!-- 顶部中间菜单 -->
       <div class="top-cent">
@@ -52,8 +52,8 @@
           </svg>
           <span>学校管理员1111</span>
         </div>
-        <div class="text">全屏切换</div>
-        <div class="text">退出</div>
+        <span style="margin-right: 10px">全屏切换</span>
+        <span>退出</span>
       </div>
     </div>
     <el-breadcrumb separator="/">
@@ -71,22 +71,22 @@
 
 <style lang="scss">
 .head-bread {
-  height: 75px;
+  height: 110px;
   .head {
     display: flex;
-    width: 97%;
     margin: 0 auto;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-around;
+    height: 70px;
+    line-height: 70px;
+    box-shadow: 0px 5px 10px #888888;
+    background: linear-gradient(90deg, #000248, #1792c2);
     .top-left {
       // width: 15%;
       font-size: 22px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 70px;
-      line-height: 70px;
-      color: #fff !important;
+      // color: #fff !important;
       .title {
         color: #fff;
         margin-left: 8px;
@@ -136,7 +136,7 @@
     height: 40px;
     line-height: 40px;
     color: #303133;
-    padding-left: 20px;
+    padding-left: 30px;
     .el-breadcrumb-item {
       float: left;
     }

@@ -9,14 +9,13 @@ interface DataType {
 //登录接口返回的数据类型
 export interface loginResponseData {
   code: number
+  // serviceName: string
   data: DataType
 }
 interface User {
-  userId: number
-  avatar: string
   username: string
   password: string
-  roles: string[]
+  // roles: string[]
 }
 //定义服务器返回用户信息相关的数据类型
 export interface userResponseData {

@@ -10,7 +10,8 @@ import 'virtual:svg-icons-register'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs' //报错 ,方法就是加一行 "//@ts-ignore"
 import App from './App.vue'
 import router from './router'
+import { pinia } from './store'
 const app = createApp(App)
 import SvgIcon from '@/components/SvgIcon/index.vue'
 app.component('SvgIcon', SvgIcon)
-app.use(router).use(ElementPlus, { locale: zhCn }).mount('#app')
+app.use(router).use(pinia).use(ElementPlus, { locale: zhCn }).mount('#app')

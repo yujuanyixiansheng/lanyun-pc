@@ -1,40 +1,50 @@
 <!-- 首页 -->
 <template>
   <div class="home-main">
-    <!-- one card 卡片-->
-    <div class="all-card">
-      <div class="card-left">图标</div>
-      <div class="card-right">
-        <div class="card-text">文字</div>
-        <div class="card-desc">数字</div>
-      </div>
+    <div class="card">
+      <div class="card-item" v-for="item in 5" :key="item">12313</div>
     </div>
-    <!-- two echarts -->
-    <div class="alarm-echarts">22</div>
-    <!-- three table-column -->
-    <div class="scale-column">33</div>
-    <!-- four scale-introduce -->
-    <div class="scale-introduce">44</div>
+    <div class="echart">echart</div>
+    <div class="scale-class">class</div>
+    <div class="scale-introduce">introduce</div>
   </div>
 </template>
 
-<script setup lang="ts">
-// import {ref,reactive} from 'vue'
-</script>
+<script setup lang="ts"></script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .home-main {
-  min-width: 1220px;
   height: 100%;
   margin-left: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: baseline;
-  color: #000 !important;
-  text-align: center;
-  ::v-deep(.all-card) {
-    color: #000;
+  .card {
+    display: flex;
+
+    .card-item {
+      flex: 1;
+      height: 100px;
+      background: #746868;
+    }
+    .card-item:first-child {
+      margin-left: 0;
+    }
+    .card-item:last-child {
+      margin-right: 0;
+    }
+  }
+  .echart {
+    margin-top: 10px;
+    height: 340px;
+    background: #333;
+  }
+  .scale-class {
+    margin-top: 10px;
+    height: 120px;
+    background: #333;
+  }
+  .scale-introduce {
+    margin-top: 10px;
+    height: 320px;
+    background: #333;
   }
 }
 </style>

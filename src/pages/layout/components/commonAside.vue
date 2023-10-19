@@ -51,12 +51,11 @@ const handleClose = (key: string, keyPath: string[]) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .el-menu {
   height: 100%;
   .el-menu-item-group {
     //设置该节点高度
-    height: 0;
     .el-sub-menu .is-opened {
       margin: 0;
       padding: 0;
@@ -65,13 +64,12 @@ const handleClose = (key: string, keyPath: string[]) => {
 }
 .el-menu-vertical-demo .el-sub-menu {
   background: #202a34;
-  height: 48px;
+  // height: 48px;
   .el-menu-item is-active {
-    height: 50px;
+    // height: 50px;
   }
 }
-// .el-menu-vertical-demo:not(.el-menu--collapse) {
-//   width: 100%;
-//   height: 100%;
-// }
+.el-menu-item-group__title {
+  display: none;
+}
 </style>

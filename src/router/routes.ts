@@ -16,33 +16,6 @@ export const constantRoute: Array<RouteRecordRaw> = [
       title: 'layout',
       hidden: false,
       icon: 'Avatar',
-      // children:[
-      //   path: '/home',
-      //   component: () => import('@/pages/layout/index.vue'),
-      //   name: 'layout',
-      // ]
-      // children: [
-      //   {
-      //     path: '/task/psychologyTask',
-      //     component: () => import('@/pages/task/psychologyTask.vue'),
-      //     name: 'psychologyTask',
-      //     meta: {
-      //       hidden: false,
-      //       title: '任务管理',
-      //       icon: 'Lock',
-      //     },
-      //   },
-      //   {
-      //     path: '/task/psychologyTask',
-      //     component: () => import('@/pages/task/psychologyTask.vue'),
-      //     name: 'psychologyTask',
-      //     meta: {
-      //       hidden: false,
-      //       title: '任务管理',
-      //       icon: 'Lock',
-      //     },
-      //   },
-      // ],
     },
     children: [
       {

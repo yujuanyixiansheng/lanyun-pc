@@ -1,9 +1,11 @@
 //进行axios二次封装
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+console.log(import.meta.env.VITE_APP_BASE_API)
+
 //1.create创建axios实例  配置基准路径和超时时间的地方
 let request = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_API, //基础路径上会携带 /api
+  baseURL: import.meta.env.VITE_APP_BASE_API + '/sys', //基础路径上会携带 /api
   timeout: 5000,
 })
 //2.给实例添加请求拦截
