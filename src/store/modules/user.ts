@@ -2,12 +2,13 @@ import { defineStore } from 'pinia'
 import {} from '@/api/user/index'
 import { reqUserInfo, reqLogin } from '@/api/user'
 import { loginForm } from '@/api/user/type'
-export const userStore = defineStore('User', {
+export let userStore = defineStore('User', {
   state: () => {
     return {
       token: localStorage.getItem('token'),
     }
   },
+  //异步/逻辑处理的地方
   actions: {
     //用户登录 方法
     async userLogin(data: loginForm) {

@@ -53,11 +53,9 @@ import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElNotification } from 'element-plus'
-
-// import { onMounted } from 'vue'
-// import { reqLogin } from '../api/user/index'
-
 import { userStore } from '@/store/modules/user'
+const user = userStore()
+
 //收集账号与密码数据
 let loginForm = reactive({ username: 'lyysxx002', password: 'lyxl123456' })
 const router = useRouter()
@@ -86,10 +84,8 @@ const rules = reactive<FormRules>({
 })
 // 定义按钮节点
 const formRef = ref<FormInstance>()
-// 登录回调
-//登录按钮的回调
 // let loading = ref(false)
-const user = userStore()
+// 登录按钮回调
 const handleSubmit = async (formRef: any) => {
   //按钮加载效果
   // loading.value = true
