@@ -55,7 +55,6 @@ import type { FormInstance, FormRules } from 'element-plus'
 import { ElNotification } from 'element-plus'
 import { userStore } from '@/store/modules/user'
 const user = userStore()
-
 //收集账号与密码数据
 let loginForm = reactive({ username: 'lyysxx002', password: 'lyxl123456' })
 const router = useRouter()

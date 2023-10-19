@@ -14,4 +14,4 @@ import { pinia } from './store'
 const app = createApp(App)
 import SvgIcon from '@/components/SvgIcon/index.vue'
 app.component('SvgIcon', SvgIcon)
-app.use(router).use(pinia).use(ElementPlus, { locale: zhCn }).mount('#app')
+app.use(router).use(ElementPlus, { locale: zhCn }).use(pinia).mount('#app')
