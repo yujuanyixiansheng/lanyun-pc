@@ -54,6 +54,7 @@ import { useRouter } from 'vue-router'
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElNotification } from 'element-plus'
 import { userStore } from '@/store/modules/user'
+// import { reqLogin } from '@/api/user'
 const user = userStore()
 //收集账号与密码数据
 let loginForm = reactive({ username: 'lyysxx002', password: 'lyxl123456' })
@@ -93,9 +94,9 @@ const handleSubmit = async (formRef: any) => {
     if (valid) {
       console.log('登录成功了', valid)
       try {
-        await user.userLogin(loginForm)
-        router.push('/')
-        ElNotification.success('登录成功')
+        // await user.userLogin(loginForm)
+        // router.push('/')
+        // ElNotification.success('登录成功')
       } catch (error) {
         console.log(error)
       }

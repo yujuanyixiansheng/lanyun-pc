@@ -11,6 +11,7 @@ let request = axios.create({
 //2.给实例添加请求拦截
 request.interceptors.request.use((config) => {
   config.baseURL = import.meta.env[config.data.name]
+  console.log(config)
 
   //请求拦截可以给请求头header携带公共参数  config.headers.token='123'
   return config
