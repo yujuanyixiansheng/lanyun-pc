@@ -7,41 +7,53 @@
     text-color="#fff"
     @open="handleOpen"
     @close="handleClose"
+    v-for="item in menuList"
+    :key="item.name"
   >
-    <!-- 菜单一级列表 -->
-    <el-menu-item index="1">
+    <!-- 无子路由菜单 -->
+    <el-menu-item
+      v-if="!item.children && item.children.length == 0"
+      :index="item.menuId"
+    >
       <el-icon><icon-menu /></el-icon>
-      <span>首页</span>
+      <span>{{ item.displayName }}</span>
     </el-menu-item>
-    <!-- 菜单二级列表 -->
-    <el-sub-menu index="2">
+    <!-- 有且仅有一个子路由 -->
+    <template v-if="item.children">
+      <el-menu-item
+        v-if="item.children && item.children.length == 1"
+        :index="item.children[0].menuId"
+      >
+        <template #title>
+          <el-menu-item>1111{{ item.children[0].displayName }}</el-menu-item>
+        </template>
+      </el-menu-item>
+    </template>
+    <!-- 有子路由且个数大于一个 -->
+    <el-sub-menu
+      v-if="item.children && item.children.length >= 2"
+      :index="item.menuId"
+    >
       <template #title>
         <el-icon><location /></el-icon>
-        <span>学校管理</span>
+        <span>{{ item.displayName }}</span>
       </template>
-      <el-menu-item-group>
-        <el-menu-item index="2-1">教室管理</el-menu-item>
-        <el-menu-item index="2-2">年级管理</el-menu-item>
-        <el-menu-item index="2-3">专业管理</el-menu-item>
-      </el-menu-item-group>
-    </el-sub-menu>
-    <!-- 第二个多级菜单 -->
-    <el-sub-menu index="3">
-      <template #title>
-        <el-icon><location /></el-icon>
-        <span>任务管理</span>
-      </template>
-      <el-menu-item-group>
-        <el-menu-item index="3-1">任务管理</el-menu-item>
-        <el-menu-item index="3-2">历史任务</el-menu-item>
+      <el-menu-item-group v-for="subItem in item.children" :key="subItem.name">
+        <el-menu-item :index="subItem.menuId">{{
+          subItem.displayName
+        }}</el-menu-item>
       </el-menu-item-group>
     </el-sub-menu>
   </el-menu>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { Menu as IconMenu, Location } from '@element-plus/icons-vue'
+
+// const menuArray=reactive([])
+defineProps(['menuList'])
+
 const isCollapse = ref(false)
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
@@ -54,22 +66,20 @@ const handleClose = (key: string, keyPath: string[]) => {
 <style lang="scss">
 .el-menu {
   height: 100%;
-  .el-menu-item-group {
-    //设置该节点高度
-    .el-sub-menu .is-opened {
-      margin: 0;
-      padding: 0;
-    }
-  }
+  overflow: auto;
+  // .el-menu-item-group {
+  //   //设置该节点高度
+  //   .el-sub-menu .is-opened {
+  //     margin: 0;
+  //     padding: 0;
+  //   }
+  // }
 }
 .el-menu-vertical-demo .el-sub-menu {
   background: #202a34;
   // height: 48px;
-  .el-menu-item is-active {
-    // height: 50px;
-  }
 }
-.el-menu-item-group__title {
-  display: none;
-}
+// .el-menu-item-group__title {
+//   display: none;
+// }
 </style>

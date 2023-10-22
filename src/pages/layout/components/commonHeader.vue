@@ -46,14 +46,16 @@
         <svg style="width: 24px; height: 24px; margin-right: 20px">
           <use xlink:href="#icon-manage" fill="#fff"></use>
         </svg>
-        <div class="icon-text">
+        <div class="icon-text" style="cursor: pointer">
           <svg style="width: 24px; height: 24px">
             <use xlink:href="#icon-fa-user" fill="#fff"></use>
           </svg>
           <span>学校管理员1111</span>
         </div>
-        <span style="margin-right: 10px">全屏切换</span>
-        <span>退出</span>
+        <span style="margin-right: 10px; cursor: pointer" @click="fullScreen"
+          >全屏切换</span
+        >
+        <span @click="exitLogin" style="cursor: pointer">退出</span>
       </div>
     </div>
     <el-breadcrumb separator="/">
@@ -66,16 +68,45 @@
 </template>
 
 <script setup lang="ts">
+import { ElMessageBox } from 'element-plus'
+import { userStore } from '@/store/modules/user'
+import { useRouter } from 'vue-router'
+const user = userStore()
+const router = useRouter()
 // import {ref,reactive} from 'vue'
+const exitLogin = () => {
+  ElMessageBox.confirm('确认退出登录吗?', '提示', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning',
+  })
+    .then(() => {
+      // 清空token
+      user.logout()
+      // 跳转到登录页
+      router.push('/login')
+    })
+    .catch(() => {})
+}
+const fullScreen = () => {
+  let full = document.fullscreenElement
+  if (!full) {
+    document.documentElement.requestFullscreen() //文档根节点的方法requestFullscreen实现全屏
+  } else {
+    document.exitFullscreen() //退出全屏
+  }
+}
 </script>
 
 <style lang="scss">
 .head-bread {
   height: 110px;
+  width: 100%;
   .head {
     display: flex;
+    // width: 90%;
     margin: 0 auto;
-    justify-content: space-around;
+    justify-content: space-between;
     height: 70px;
     line-height: 70px;
     box-shadow: 0px 5px 10px #888888;
@@ -86,6 +117,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-left: 20px;
       // color: #fff !important;
       .title {
         color: #fff;
@@ -117,6 +149,7 @@
       align-items: center;
       justify-content: space-around;
       color: #fff;
+      margin-right: 20px;
       > div {
         margin-right: 20px;
       }

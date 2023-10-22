@@ -52,12 +52,13 @@
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import type { FormInstance, FormRules } from 'element-plus'
-import { ElNotification } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { userStore } from '@/store/modules/user'
 // import { reqLogin } from '@/api/user'
 const user = userStore()
 //收集账号与密码数据
 let loginForm = reactive({ username: 'lyysxx002', password: 'lyxl123456' })
+// let loginForm = reactive({ username: '', password: '' })
 const router = useRouter()
 // onMounted(() => {
 //   reqLogin(loginForm)
@@ -83,33 +84,32 @@ const rules = reactive<FormRules>({
   ],
 })
 // 定义按钮节点
-const formRef = ref<FormInstance>()
+let formRef = ref<FormInstance>()
 // let loading = ref(false)
 // 登录按钮回调
 const handleSubmit = async (formRef: any) => {
   //按钮加载效果
+  // if (!formRef) return
   // loading.value = true
   await formRef.validate(async (valid: any) => {
     if (!formRef) return
     if (valid) {
       console.log('登录成功了', valid)
       try {
-        // await user.userLogin(loginForm)
-        // router.push('/')
-        // ElNotification.success('登录成功')
+        await user.userLogin(loginForm)
+        router.push('/')
+        ElMessage({
+          duration: 1000,
+          message: '登录成功',
+          type: 'success',
+        })
       } catch (error) {
-        console.log(error)
+        alert(error)
       }
-
-      // console.log(res, '登录了哟')
     } else {
-      console.log('失败了')
+      alert('用户名或密码错误')
     }
   })
-  //点击登录按钮以后干什么
-  //通知仓库发起请求
-  //请求成功->路由跳转
-  //请求失败->弹出登陆失败信息
 }
 </script>
 <style lang="scss">

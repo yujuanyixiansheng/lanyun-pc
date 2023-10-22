@@ -14,4 +14,6 @@ import { pinia } from './store'
 const app = createApp(App)
 import SvgIcon from '@/components/SvgIcon/index.vue'
 app.component('SvgIcon', SvgIcon)
+// 导入路由权限
+// import permission from '@/router/permission'
 app.use(router).use(ElementPlus, { locale: zhCn }).use(pinia).mount('#app')
