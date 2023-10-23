@@ -26,4 +26,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
+  define: {
+    __VUE_PROD_DEVTOOLS__: true, //显示devtools
+  },
 })

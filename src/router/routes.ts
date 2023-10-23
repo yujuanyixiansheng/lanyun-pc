@@ -1,12 +1,14 @@
 //对外暴露配置路由
 import { RouteRecordRaw } from 'vue-router'
 export const constantRoute: Array<RouteRecordRaw> = [
-  // 重定向首页
-  { path: '/', redirect: '/home' },
   {
     path: '/login',
     component: () => import('@/pages/login.vue'),
     name: 'login',
+    meta: {
+      title: '登录',
+      hidden: false,
+    },
   },
   {
     path: '/',
@@ -14,14 +16,55 @@ export const constantRoute: Array<RouteRecordRaw> = [
     name: 'layout',
     meta: {
       title: 'layout',
-      hidden: false,
-      icon: 'Avatar',
+      hidden: false, //代表标题在菜单中是否隐藏 true:隐藏,false:不隐藏
+      // icon: 'Avatar',
     },
+    // 重定向首页
+    redirect: '/schoolHome',
     children: [
       {
-        path: 'home',
-        name: 'home',
-        component: () => import('../pages/schoolHome.vue'),
+        path: '/schoolHome',
+        name: 'SchoolHome',
+        component: () => import('@/pages/schoolHome.vue'),
+        meta: {
+          title: '首页',
+          // hidden: false,
+          // icon: 'HomeFilled',
+        },
+      },
+      {
+        path: '/psychology',
+        component: () => import('@/pages/psychologyEvaluation/index.vue'),
+        name: 'Psychology',
+        meta: {
+          title: '心理测评',
+          icon: 'Message',
+          hidden: false,
+        },
+        redirect: '/psychology/evaquery',
+        children: [
+          {
+            path: '/psychology/evaquery',
+            name: 'Evaquery',
+            component: () =>
+              import('@/pages/psychologyEvaluation/evaquery.vue'),
+            meta: {
+              title: '心理测评',
+              hidden: false,
+              icon: 'HomeFilled',
+            },
+          },
+          {
+            path: '/psychology/focus',
+            name: 'focus',
+            component: () => import('@/pages/psychologyEvaluation/focus.vue'),
+            meta: {
+              title: '心理访谈',
+              hidden: false,
+              icon: 'HomeFilled',
+            },
+          },
+        ],
       },
     ],
   },

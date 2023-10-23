@@ -4,8 +4,8 @@
       <common-header />
     </el-header>
     <el-container>
-      <el-aside>
-        <Menu />
+      <el-aside :class="{ fold: LayoutSettingStore.fold ? true : false }">
+        <Menu :menuList="usestore.menuRoutes" />
       </el-aside>
       <el-main>
         <router-view></router-view>
@@ -19,17 +19,15 @@ import commonHeader from './components/commonHeader.vue'
 import Menu from './components/menu/index.vue'
 import { onMounted, toRaw } from 'vue'
 import { userStore } from '@/store/modules/user'
-const usestore = userStore()
-onMounted(async () => {
-  await usestore.userInfo()
-})
-const menuListArray = toRaw(usestore.menuRoutes)
-// usestore
+import useLayoutSettingStore from '@/store/modules/setting'
+let LayoutSettingStore = useLayoutSettingStore()
+let usestore = userStore()
+console.log(toRaw(usestore.menuRoutes), '动态路由列表')
 </script>
 
 <style lang="scss">
 .el-container {
-  min-width: 1000px;
+  min-width: 100%;
   height: 100%;
   overflow: hidden; //关键,不必外面多一层div 加上overflow页面就没有两层滚动条了 !!!!!
   .el-header {
@@ -40,15 +38,22 @@ const menuListArray = toRaw(usestore.menuRoutes)
   .el-container {
     padding: 10px;
     .el-aside {
+      transition: all 0.5s;
       width: 240px;
       height: 100%;
       // opacity: 0.9;
       text-align: center;
-      line-height: 200px;
+      // line-height: 200px;
       position: fixed;
       top: 70px;
       left: 0;
+      &.fold {
+        position: fixed;
+        top: 70px;
+        left: -240px;
+      }
     }
+
     .el-main {
       padding: 10px;
       padding-top: 0 !important;

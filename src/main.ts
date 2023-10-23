@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, onMounted } from 'vue'
 import ElementPlus from 'element-plus'
 import '@/assets/styles/cyc.scss'
 import 'element-plus/dist/index.css'
@@ -11,9 +11,16 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs' //报错 ,方法就是加�
 import App from './App.vue'
 import router from './router'
 import { pinia } from './store'
+
 const app = createApp(App)
-import SvgIcon from '@/components/SvgIcon/index.vue'
-app.component('SvgIcon', SvgIcon)
-// 导入路由权限
-// import permission from '@/router/permission'
+import gloablComponent from './components/index' //引入自定义的一些插件
+app.use(gloablComponent) //安装使用插件
 app.use(router).use(ElementPlus, { locale: zhCn }).use(pinia).mount('#app')
+// 获取用户信息列表
+import { userStore } from '@/store/modules/user'
+
+let token = localStorage.getItem('token')
+let useStore = userStore()
+if (token) {
+  useStore.userInfoRoutes()
+}

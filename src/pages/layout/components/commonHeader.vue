@@ -3,9 +3,20 @@
     <div class="head">
       <!-- 顶部左侧 -->
       <div class="top-left">
-        <svg style="width: 30px; height: 30px">
-          <use xlink:href="#icon-fold" fill="#fff"></use>
+        <svg style="width: 30px; height: 30px" @click="changeIcon">
+          <use
+            v-if="LayoutSettingStore.fold"
+            xlink:href="#icon-expand"
+            fill="#fff"
+          ></use>
+          <use v-else xlink:href="#icon-fold" fill="#fff"></use>
         </svg>
+        <!-- <el-icon
+          style="width: 36px; height: 36px,color:#fff;"
+          @click="changeIcon"
+        >
+          <component :is="fold ? 'Fold' : 'Expand'"></component>
+        </el-icon> -->
         <span class="title">心理健康教育平台</span>
       </div>
       <!-- 顶部中间菜单 -->
@@ -58,11 +69,18 @@
         <span @click="exitLogin" style="cursor: pointer">退出</span>
       </div>
     </div>
+    <!-- 面包屑 -->
     <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item><a href="/">任务管理</a></el-breadcrumb-item>
-      <el-breadcrumb-item>心理测评</el-breadcrumb-item>
-      <el-breadcrumb-item>心理访谈</el-breadcrumb-item>
+      <!-- 面包屑动态展示名字和标题 -->
+      <el-breadcrumb-item
+        v-for="(item, index) in $route.matched"
+        :key="index"
+        @click="handleBread"
+        v-show="item.meta.title"
+      >
+        <!-- 面包屑展示匹配路由的标题 -->
+        <span :to="item.path">{{ item.meta.title }}</span>
+      </el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>
@@ -70,7 +88,10 @@
 <script setup lang="ts">
 import { ElMessageBox } from 'element-plus'
 import { userStore } from '@/store/modules/user'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+// import { ref } from 'vue'
+import useLayoutSettingStore from '@/store/modules/setting'
+let LayoutSettingStore = useLayoutSettingStore()
 const user = userStore()
 const router = useRouter()
 // import {ref,reactive} from 'vue'
@@ -96,11 +117,25 @@ const fullScreen = () => {
     document.exitFullscreen() //退出全屏
   }
 }
+// let fold = ref(false) //控制菜单折叠/打开
+// 菜单显示隐藏实现
+const changeIcon = () => {
+  // alert(1111)
+  // 图标切换
+  // fold.value = !fold.value
+  LayoutSettingStore.fold = !LayoutSettingStore.fold
+}
+// 获取路由对象
+let $route = useRoute()
+//处理面包屑路由
+const handleBread = () => {
+  console.log($route, $route.matched)
+}
 </script>
 
 <style lang="scss">
 .head-bread {
-  height: 110px;
+  height: 100px;
   width: 100%;
   .head {
     display: flex;
@@ -172,6 +207,7 @@ const fullScreen = () => {
     padding-left: 30px;
     .el-breadcrumb-item {
       float: left;
+      cursor: pointer;
     }
   }
 }

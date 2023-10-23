@@ -4,6 +4,7 @@
 export enum API {
   LOGIN_URL = '/educationadmin/userLogin',
   USER_URL = '/educationadmin/getUserInfo',
+  SCHOOL_HOME_URL = '/educationadmin/statistics/countStudent', //首页卡片列表数据路径
 }
 export interface loginForm {
   username: string
@@ -48,4 +49,17 @@ interface User {
 export interface userResponseData {
   code: number
   data: User
+}
+interface Card {
+  studentTotal: number
+  schoolTotal: number
+  keyStudentTotal: number
+  studentEvaluateTimes: number
+  studentCounselingTimes: number
+  studentTrainTimes: number
+  secondInterviewNum: number
+}
+export interface cardResponseData {
+  code: number
+  data: Card
 }

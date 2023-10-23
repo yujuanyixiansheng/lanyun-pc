@@ -67,19 +67,5 @@ const handleClose = (key: string, keyPath: string[]) => {
 .el-menu {
   height: 100%;
   overflow: auto;
-  // .el-menu-item-group {
-  //   //设置该节点高度
-  //   .el-sub-menu .is-opened {
-  //     margin: 0;
-  //     padding: 0;
-  //   }
-  // }
 }
-.el-menu-vertical-demo .el-sub-menu {
-  background: #202a34;
-  // height: 48px;
-}
-// .el-menu-item-group__title {
-//   display: none;
-// }
 </style>

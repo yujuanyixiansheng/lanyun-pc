@@ -3,6 +3,8 @@ import {} from '@/api/user/index'
 import { reqUserInfo, reqLogin } from '@/api/user'
 import { loginForm } from '@/api/user/type'
 import { UserState } from './types/types'
+// 引入常量路由
+import { constantRoute } from '@/router/routes'
 // import { computed } from 'vue'
 export let userStore = defineStore('User', {
   state: (): UserState => {
@@ -10,7 +12,8 @@ export let userStore = defineStore('User', {
       token: localStorage.getItem('token'),
       // isLogin: false,
       userInfo: {},
-      menuRoutes: [],
+      menuRoutes: [], //仓库存储生成菜单需要的数组路由
+      // menuRoutes: constantRoute, //仓库存储生成菜单需要的数组路由
     }
   },
   //异步/逻辑处理的地方
@@ -33,13 +36,12 @@ export let userStore = defineStore('User', {
       localStorage.setItem('token', '')
     },
     //获取用户信息方法
-    async userInfo() {
+    async userInfoRoutes() {
       //获取用户信息进行存储
       let result = await reqUserInfo()
       if (result.code == 200) {
         this.userInfo = result.data.userInfo
         this.menuRoutes.push(...result.data.permissions)
-        // console.log('store内的用户信息', this.userInfo, this.menuRoutes)
         return this.menuRoutes
       }
     },
