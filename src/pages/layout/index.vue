@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import commonHeader from './components/commonHeader.vue'
 import Menu from './components/menu/index.vue'
-import { onMounted, toRaw } from 'vue'
+import { toRaw } from 'vue'
 import { userStore } from '@/store/modules/user'
 import useLayoutSettingStore from '@/store/modules/setting'
 let LayoutSettingStore = useLayoutSettingStore()
@@ -30,13 +30,16 @@ console.log(toRaw(usestore.menuRoutes), '动态路由列表')
   min-width: 100%;
   height: 100%;
   overflow: hidden; //关键,不必外面多一层div 加上overflow页面就没有两层滚动条了 !!!!!
+
   .el-header {
     --el-header-height: 110px;
     --el-header-padding: 0;
     overflow: hidden;
   }
+
   .el-container {
     padding: 10px;
+
     .el-aside {
       transition: all 0.5s;
       width: 240px;
@@ -47,6 +50,7 @@ console.log(toRaw(usestore.menuRoutes), '动态路由列表')
       position: fixed;
       top: 70px;
       left: 0;
+
       &.fold {
         position: fixed;
         top: 70px;
@@ -60,5 +64,5 @@ console.log(toRaw(usestore.menuRoutes), '动态路由列表')
     }
   }
 }
-// }
-</style>
+
+// }</style>
