@@ -5,6 +5,7 @@ export enum API {
   LOGIN_URL = '/educationadmin/userLogin',
   USER_URL = '/educationadmin/getUserInfo',
   SCHOOL_HOME_URL = '/educationadmin/statistics/countStudent', //首页卡片列表数据路径
+  ALARM_URL = '/educationadmin/statistics/countAlarmScale', //首页预警列表数据路径
 }
 export interface loginForm {
   username: string
@@ -62,4 +63,13 @@ interface Card {
 export interface cardResponseData {
   code: number
   data: Card
+}
+interface Alarm {
+  statuses: {}[]
+  total: number
+  yearSeverityVoList: {}[]
+}
+export interface alarmResponseData {
+  code: number
+  data: Alarm
 }
