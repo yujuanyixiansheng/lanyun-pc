@@ -5,6 +5,7 @@ import type {
   loginResponseData,
   userResponseData,
   cardResponseData,
+  alarmResponseData,
 } from './type'
 import { API } from './type'
 //统一管理接口
@@ -20,4 +21,8 @@ export const reqUserInfo = () =>
 //获取首页卡片数据
 export const reqCardList = () => {
   return request.get<any, cardResponseData>(API.SCHOOL_HOME_URL)
+}
+//首页告警分类
+export const reqAlarmList = () => {
+  return request.get<any, alarmResponseData>(API.ALARM_URL)
 }
