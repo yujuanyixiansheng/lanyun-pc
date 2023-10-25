@@ -17,7 +17,6 @@
 <script setup lang="ts">
 import commonHeader from './components/commonHeader.vue'
 import Menu from './components/menu/index.vue'
-// import { toRaw } from 'vue'
 import { userStore } from '@/store/modules/user'
 import useLayoutSettingStore from '@/store/modules/setting'
 let LayoutSettingStore = useLayoutSettingStore()
@@ -61,6 +60,7 @@ let usestore = userStore()
     .el-main {
       padding: 10px;
       padding-top: 0 !important;
+      overflow-x: hidden;
     }
   }
 }

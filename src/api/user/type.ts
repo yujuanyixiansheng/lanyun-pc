@@ -6,6 +6,8 @@ export enum API {
   USER_URL = '/educationadmin/getUserInfo',
   SCHOOL_HOME_URL = '/educationadmin/statistics/countStudent', //首页卡片列表数据路径
   ALARM_URL = '/educationadmin/statistics/countAlarmScale', //首页预警列表数据路径
+  SCALE_URL = '/educationadmin/statistics/countScale', //首页系统量表数据路径
+  INTRODUCE_URL = '/educationadmin/scaleintroduce/getScaleintroduceList', //首页底部介绍详情
 }
 export interface loginForm {
   username: string
@@ -72,4 +74,16 @@ interface Alarm {
 export interface alarmResponseData {
   code: number
   data: Alarm
+}
+interface Scale {
+  scaleClassList: {}[]
+  scaleCnt: number
+}
+export interface scaleResponseData {
+  code: number
+  data: Scale
+}
+export interface introduceResData {
+  code: number
+  data: {}[]
 }

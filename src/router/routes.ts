@@ -22,46 +22,70 @@ export const constantRoute: Array<RouteRecordRaw> = [
     // 重定向首页
     redirect: '/schoolHome',
     children: [
+      //首页
       {
         path: '/schoolHome',
         name: 'SchoolHome',
-        component: () => import('@/pages/schoolHome.vue'),
+        component: () => import('@/pages/SchoolHome.vue'),
         meta: {
           title: '首页',
-          // hidden: false,
-          // icon: 'HomeFilled',
         },
       },
+      //学校管理
       {
-        path: '/psychology',
-        component: () => import('@/pages/psychologyEvaluation/index.vue'),
-        name: 'Psychology',
+        path: '/schoolmgr',
+        name: 'Schoolmgr',
+        component: () => import('@/pages/Schoolmgr/index.vue'),
         meta: {
-          title: '心理测评',
-          icon: 'Message',
-          hidden: false,
+          title: '学校管理',
         },
-        redirect: '/psychology/evaquery',
         children: [
           {
-            path: '/psychology/evaquery',
-            name: 'Evaquery',
-            component: () =>
-              import('@/pages/psychologyEvaluation/evaquery.vue'),
+            path: '/schoolmgr/teacher',
+            name: 'Teacher',
+            component: () => import('@/pages/Schoolmgr/teacher.vue'),
             meta: {
-              title: '心理测评',
-              hidden: false,
-              icon: 'HomeFilled',
+              title: '教师管理',
             },
           },
           {
-            path: '/psychology/focus',
-            name: 'focus',
-            component: () => import('@/pages/psychologyEvaluation/focus.vue'),
+            path: '/schoolmgr/grade',
+            name: 'Grade',
+            component: () => import('@/pages/Schoolmgr/grade.vue'),
             meta: {
-              title: '心理访谈',
-              hidden: false,
-              icon: 'HomeFilled',
+              title: '年级管理',
+            },
+          },
+          {
+            path: '/schoolmgr/major',
+            name: 'Major',
+            component: () => import('@/pages/Schoolmgr/major.vue'),
+            meta: {
+              title: '专业管理',
+            },
+          },
+          {
+            path: '/schoolmgr/class',
+            name: 'Class',
+            component: () => import('@/pages/Schoolmgr/class.vue'),
+            meta: {
+              title: '班级管理',
+            },
+          },
+          {
+            path: '/schoolmgr/student',
+            name: 'Student',
+            component: () => import('@/pages/Schoolmgr/student.vue'),
+            meta: {
+              title: '学生管理',
+            },
+          },
+          {
+            path: '/sysmgr/archives',
+            name: 'Archives',
+            component: () => import('@/pages/Schoolmgr/archives.vue'),
+            meta: {
+              title: '档案管理',
             },
           },
         ],
@@ -69,108 +93,3 @@ export const constantRoute: Array<RouteRecordRaw> = [
     ],
   },
 ]
-
-// // 任务管理
-//     {
-//       path: '/task',
-//       children: [
-//         {
-//           path: '/task/historyTask',
-//           component: () => import('@/pages/task/historyTask.vue'),
-//           name:'historyTask',
-//           meta: {
-//             hidden: false,
-//               title: '历史任务',
-//               icon: 'Lock',
-//               },
-//         },
-//         {
-//           path: '/task/psychologyTask',
-//           component: () => import('@/pages/task/psychologyTask.vue'),
-//           name:'psychologyTask',
-//           meta: {
-//             hidden: false,
-//               title: '任务管理',
-//               icon: 'Lock',
-//               },
-//         },
-//       ],
-//     },
-//     //心理测评
-//     {
-//       path: '/psychologyEvaluation',
-//       children: [
-//         {
-//           path: '/psychologyEvaluation/evaquery',
-//           component: () => import('@/pages/psychologyEvaluation/evaquery.vue'),
-//           name:'evaquery',
-//           meta: {
-//             hidden: false,
-//               title: '测评学生选择',
-//               icon: 'Lock',
-//               },
-//         },
-//         {
-//           path: '/psychologyEvaluation/focus',
-//           component: () => import('@/pages/psychologyEvaluation/focus.vue'),
-//           meta: {
-//             hidden: false,
-//               title: '告警学生',
-//               icon: 'Lock',
-//               }
-//         },
-//         {
-//           path: '/psychologyEvaluation/record',
-//           component: () => import('@/pages/psychologyEvaluation/record.vue'),
-//           meta: {
-//             hidden: false,
-//               title: '测评查询',
-//               icon: 'Lock',
-//               },
-//         },
-//         {
-//           path: '/psychologyEvaluation/scale',
-//           component: () => import('@/pages/psychologyEvaluation/scale.vue'),
-//           meta: {
-//             hidden: false,
-//               title: '量表管理',
-//               icon: 'Lock',
-//               },
-//         },
-//         {
-//           path: '/psychologyEvaluation/signature',
-//           component: () => import('@/pages/psychologyEvaluation/signature.vue'),
-//           meta: {
-//             hidden: false,
-//               title: '家长签名记录',
-//               icon: 'Lock',
-//               },
-//         },
-//         {
-//           path: '/psychologyEvaluation/warning',
-//           component: () => import('@/pages/psychologyEvaluation/warning.vue'),
-//           meta: {
-//             hidden: false,
-//               title: '测评告警',
-//               icon: 'Lock',
-//               },
-//         },
-//       ],
-//     }
-
-//   {
-//     path: '/Interview',
-//     component:()=>import('@/')
-//     children: [
-//       { path: 'again', component: () => import('@/pages/Interview/Again.vue') },
-//       {
-//         path: 'coachStudent',
-//         component: () => import('@/pages/Interview/CoachStudent.vue'),
-//       },
-//       {
-//         path: 'searchquestionnaire',
-//         component: () => import('@/pages/Interview/Searchquestionnaire.vue'),
-//       },
-//     ],
-//   },
-// ]

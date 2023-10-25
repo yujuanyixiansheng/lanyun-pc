@@ -6,6 +6,8 @@ import type {
   userResponseData,
   cardResponseData,
   alarmResponseData,
+  scaleResponseData,
+  introduceResData,
 } from './type'
 import { API } from './type'
 //统一管理接口
@@ -25,4 +27,12 @@ export const reqCardList = () => {
 //首页告警分类
 export const reqAlarmList = () => {
   return request.get<any, alarmResponseData>(API.ALARM_URL)
+}
+// 首页系统量表接口
+export const reqScaleList = () => {
+  return request.get<any, scaleResponseData>(API.SCALE_URL)
+}
+//首页 底部介绍接口introduce
+export const reqIntroduceList = () => {
+  return request.get<any, introduceResData>(API.INTRODUCE_URL)
 }
