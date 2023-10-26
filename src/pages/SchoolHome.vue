@@ -362,8 +362,13 @@ const getColor = () => {
 const scaleTotal = ref()
 let scaleArr: Array<any> = reactive([])
 reqScaleList().then((res) => {
-  scaleTotal.value = res.data.scaleCnt
-  scaleArr.push(...res.data.scaleClassList)
+  if (
+    (res.data && res.data.scaleCnt && res.data.scaleCnt) ||
+    (res.data && res.data?.scaleClassList && res.data.scaleClassList.length > 0)
+  ) {
+    scaleTotal.value = res.data.scaleCnt
+    scaleArr.push(...res.data.scaleClassList)
+  }
 })
 //底部详情介绍接口
 let introArr: Array<any> = reactive([])
