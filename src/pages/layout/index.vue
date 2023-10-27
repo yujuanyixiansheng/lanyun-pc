@@ -31,13 +31,13 @@ let usestore = userStore()
   overflow: hidden; //关键,不必外面多一层div 加上overflow页面就没有两层滚动条了 !!!!!
 
   .el-header {
-    --el-header-height: 110px;
-    --el-header-padding: 0;
+    height: 110px;
+    padding: 0;
     overflow: hidden;
   }
 
   .el-container {
-    padding: 10px;
+    // padding: 10px;
 
     .el-aside {
       transition: all 0.5s;
@@ -47,19 +47,17 @@ let usestore = userStore()
       text-align: center;
       // line-height: 200px;
       position: fixed;
+      z-index: 999;
       top: 70px;
       left: 0;
 
       &.fold {
-        position: fixed;
-        top: 70px;
         left: -240px;
       }
     }
 
     .el-main {
-      padding: 10px;
-      padding-top: 0 !important;
+      padding: 0 20px;
       overflow-x: hidden;
     }
   }

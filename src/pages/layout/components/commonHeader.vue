@@ -4,11 +4,7 @@
       <!-- 顶部左侧 -->
       <div class="top-left">
         <svg style="width: 30px; height: 30px" @click="changeIcon">
-          <use
-            v-if="LayoutSettingStore.fold"
-            xlink:href="#icon-expand"
-            fill="#fff"
-          ></use>
+          <use v-if="LayoutSettingStore.fold" xlink:href="#icon-expand" fill="#fff"></use>
           <use v-else xlink:href="#icon-fold" fill="#fff"></use>
         </svg>
         <!-- <el-icon
@@ -63,21 +59,15 @@
           </svg>
           <span>学校管理员1111</span>
         </div>
-        <span style="margin-right: 10px; cursor: pointer" @click="fullScreen"
-          >全屏切换</span
-        >
+        <span style="margin-right: 10px; cursor: pointer" @click="fullScreen">全屏切换</span>
         <span @click="exitLogin" style="cursor: pointer">退出</span>
       </div>
     </div>
     <!-- 面包屑 -->
     <el-breadcrumb separator="/">
       <!-- 面包屑动态展示名字和标题 -->
-      <el-breadcrumb-item
-        v-for="(item, index) in $route.matched"
-        :key="index"
-        @click="handleBread"
-        v-show="item.meta.title"
-      >
+      <el-breadcrumb-item v-for="(item, index) in $route.matched" :key="index" @click="handleBread"
+        v-show="item.meta.title">
         <!-- 面包屑展示匹配路由的标题 -->
         <span :to="item.path">{{ item.meta.title }}</span>
       </el-breadcrumb-item>
@@ -107,7 +97,7 @@ const exitLogin = () => {
       // 跳转到登录页
       router.push('/login')
     })
-    .catch(() => {})
+    .catch(() => { })
 }
 const fullScreen = () => {
   let full = document.fullscreenElement
@@ -135,8 +125,9 @@ const handleBread = () => {
 
 <style lang="scss">
 .head-bread {
-  height: 100px;
+  height: 110px;
   width: 100%;
+
   .head {
     display: flex;
     // width: 90%;
@@ -146,6 +137,7 @@ const handleBread = () => {
     line-height: 70px;
     box-shadow: 0px 5px 10px #888888;
     background: linear-gradient(90deg, #000248, #1792c2);
+
     .top-left {
       // width: 15%;
       font-size: 22px;
@@ -153,12 +145,14 @@ const handleBread = () => {
       justify-content: space-between;
       align-items: center;
       margin-left: 20px;
+
       // color: #fff !important;
       .title {
         color: #fff;
         margin-left: 8px;
       }
     }
+
     .top-cent {
       ul {
         display: flex;
@@ -166,6 +160,7 @@ const handleBread = () => {
         justify-content: space-around;
         align-items: center;
         color: #fff;
+
         li {
           list-style: none;
           height: 100%;
@@ -173,25 +168,30 @@ const handleBread = () => {
           // justify-content: space-around;
           align-items: center;
           margin-right: 20px;
+
           span {
             margin-right: 8px;
           }
         }
       }
     }
+
     .user {
       display: flex;
       align-items: center;
       justify-content: space-around;
       color: #fff;
       margin-right: 20px;
-      > div {
+
+      >div {
         margin-right: 20px;
       }
+
       .icon-text {
         display: flex;
         justify-content: space-around;
         align-items: center;
+
         // margin-right: 10px;
         span {
           margin-left: 4px;
@@ -199,12 +199,14 @@ const handleBread = () => {
       }
     }
   }
+
   .el-breadcrumb {
     font-size: 14px;
     height: 40px;
     line-height: 40px;
     color: #303133;
     padding-left: 30px;
+
     .el-breadcrumb-item {
       float: left;
       cursor: pointer;
