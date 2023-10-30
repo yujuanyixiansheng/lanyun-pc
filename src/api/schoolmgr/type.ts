@@ -5,7 +5,9 @@ export enum API {
   TEACHER_URL = '/educationadmin/teacherInfo/findTeacherInfo',
   // GRADE_URL = '/SchoolMgrBiz.GetGradeList'  //https://www.lanyunxinli.cn/JsonSvc/SchoolMgrBiz.GetGradeList
   ONLINE_STUDENT_URL = '/educationadmin/studentInfo/getStudentInfoList',
-  ORGANIZE_STUDENT_URL = '/educationadmin/organization/getOrganizationList'
+  ORGANIZE_STUDENT_URL = '/educationadmin/organization/getOrganizationList',
+  OUTLINE_STUDENT_URL = '/educationadmin/studentInfo/getFormerStuentInfoList',
+  ARCHIVE_STUDENT_URL = '/educationadmin/studentInfo/getStudentRecordList'
 }
 interface TeacherArr {
   list: Array<object>
@@ -49,25 +51,25 @@ interface studentArr {
   total: number
 }
 export interface studentListForm {
-  beginTime: string
-  classIdsList: number[]
-  commissionIdsList: number[]
-  departmentIdsList: number[]
-  educationIdsList: number[]
-  endTime: string,
-  fileName: string,
-  gradeIdsList: string[],
-  keyword: string
-  majorIdsList: string[],
+  // beginTime: string
+  // classIdsList: number[]
+  // commissionIdsList: number[]
+  // departmentIdsList: number[]
+  // educationIdsList: number[]
+  // endTime: string,
+  // fileName: string,
+  // gradeIdsList: string[],
+  // keyword: string
+  // majorIdsList: string[],
   pageNum: number
   pageSize: number
-  schoolIdsList: number[]
-  sex: number
-  status: number
+  // schoolIdsList: number[]
+  // sex: number
+  // status: number
 }
 export interface studentInter {
   code: number
-  deta: studentArr
+  data: studentArr
 }
 interface OrganDetail {
   classList: number[]

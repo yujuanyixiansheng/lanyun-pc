@@ -90,6 +90,70 @@ export const constantRoute: Array<RouteRecordRaw> = [
           },
         ],
       },
-    ],
-  },
+      // 任务管理
+      {
+        path: '/task/',
+        name: 'task',
+        // component: () => import('@/pages/Task/index.vue'),
+        meta: {
+          title: '任务管理',
+        },
+        children: [
+          {
+            path: '/task/psychologyTask',
+            name: 'psychologyTask',
+            component: () => import('@/pages/Task/PsychologyTask.vue'),
+            meta: {
+              title: '任务管理',
+            },
+          },
+          {
+            path: '/task/historyTask',
+            name: 'historyTask',
+            component: () => import('@/pages/Task/HistoryTask.vue'),
+            meta: {
+              title: '历史任务',
+            }
+          }
+        ]
+      },
+      //"教师心理健康"
+      {
+        path: '/task/teacherMental',
+        name: 'teacherMental',
+        // component: () => import('@/pages/TeacherTask/index.vue'),
+        meta: {
+          title: '教师心理健康',
+        },
+        children: [
+          {
+            path: '/task/teacherTask',
+            name: 'teacherTask',
+            component: () => import('@/pages/TeacherTask/Task/index.vue'),
+            meta: {
+              title: '任务管理',
+            },
+            children: [
+              {
+                path: '/task/teacherTask',
+                name: 'teacherTaskList',
+                component: () => import('@/pages/TeacherTask/Task/TeacherTask.vue'),
+                meta: {
+                  title: '任务管理',
+                },
+              },
+              {
+                path: '/task/teacherHistoryTask',
+                name: 'teacherHistoryTask',
+                component: () => import('@/pages/TeacherTask/Task/TeacherHistoryTask.vue'),
+                meta: {
+                  title: '历史任务',
+                }
+              }
+            ]
+          }
+        ]
+      },
+    ]
+  }
 ]

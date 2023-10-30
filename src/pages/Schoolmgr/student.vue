@@ -1,21 +1,21 @@
 <!-- 学生管理 -->
 <template>
   <div class="student-container">
-    <el-tabs v-model="activeName" class="student-all">
-      <!-- <el-tabs v-model="activeName" class="student-all" @tab-click="handleClick"> -->
-      <el-tab-pane v-for="item in editableTabs" :key="item.name" :label="item.title" :name="item.name">
+    <el-tabs v-model="activeName" class="student-all" @tab-click="handleClick">
+      <el-tab-pane v-for="item in  editableTabs " :key="item.name" :label="item.title" :name="item.name">
         <!-- 级联选择 -->
         <el-row>
           <el-col :span="5">
-            <el-select v-model="selectValue" size="large" placeholder="请选择年级">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+            <el-select v-model="selectGradeValue" size="large" placeholder="请选择年级">
+              <el-option v-for="item in gradeInfo" :key="item" :label="item" :value="item" />
             </el-select>
           </el-col>
-          <el-col :span="3"><el-select v-model="selectValue" size="large" placeholder="请选择班级">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+          <el-col :span="3"><el-select v-model="selectClassValue" size="large" placeholder="请选择班级">
+              <el-option v-for="item in  classInfo" :key="item" :label="item" :value="item + '班'">{{ item + '班'
+              }}</el-option>
             </el-select></el-col>
           <el-col :span="3"><el-select v-model="selectValue" size="large" placeholder="请选择性别">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+              <el-option v-for=" item  in  options" :key="item.value" :label="item.label" :value="item.label" />
             </el-select></el-col>
           <el-col :span="6">
             <!-- 查找输入 -->
@@ -24,7 +24,7 @@
         </el-row>
         <!-- 操作按钮 -->
         <div class="total-operate">
-          <div class="total">共查询结果 <span>{{ 1 }}</span> 条</div>
+          <div class="total">共查询结果 <span>{{ studentTotal }}</span> 条</div>
           <div class="btn-container">
             <el-button size="large">添加</el-button>
             <el-button size="large">学生注册</el-button>
@@ -34,18 +34,22 @@
         </div>
         <!-- 表格 -->
         <!-- <div class="showStudentList"> -->
-        <el-table :data="tableData" style="width: 100%" cellspacing="0" cellpadding="0">
-          <el-table-column prop="numindex" label="#" width="70" />
-          <el-table-column prop="name" label="姓名" width="100" />
-          <el-table-column prop="loginName" label="身份证号" width="220" />
-          <el-table-column prop="isConsultant" label="所属学校" width="180" />
-          <el-table-column prop="educationName" label="班级" width="130" />
-          <el-table-column prop="idcard" label="在校状态" width="80" />
-          <el-table-column prop="contact" label="性别" width="80" />
-          <el-table-column prop="sex" label="年龄" width="100"></el-table-column>
-          <el-table-column prop="age" label="联系方式" width="180" />
-          <el-table-column prop="title" label="学生账号" width="250" />
-          <el-table-column fixed="right" label="操作" width="220" header-align="center" class="dis-button">
+        <el-table :data="tableStudentData" style="width: 100%" cellspacing="0" cellpadding="0">
+          <el-table-column type="index" label="#" width="70" />
+          <el-table-column prop="name" label="姓名" width="100">
+            <template #default="scope"><span style="color:#409EFF;">{{ scope.row.name }}</span></template>
+          </el-table-column>
+          <el-table-column prop="idcard" label="身份证号" width="220" />
+          <el-table-column prop="schoolName" label="所属学校" width="180" />
+          <el-table-column prop="className" label="班级" width="130" />
+          <el-table-column prop="status" label="在校状态" width="80"><template #default="state"><span>{{
+            state.row.status === 0 ? '在校' : '毕业' }}</span></template></el-table-column>
+          <el-table-column prop="sex" label="性别" width="80"><template #default="scope"><span>{{
+            scope.row.sex === 1 ? '男' : '女' }}</span></template></el-table-column>
+          <el-table-column prop="age" label="年龄" width="100"></el-table-column>
+          <el-table-column prop="contact" label="联系方式" width="180" />
+          <el-table-column prop="loginName" label="学生账号" width="250" />
+          <el-table-column fixed="right" label="操作" width="230" header-align="center" class="dis-button">
             <template #default>
               <el-button link type="primary">密码重置</el-button>
               <el-button link type="primary">修改</el-button>
@@ -63,19 +67,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
-// import type { TabsPaneContext } from 'element-plus'
+import { ref, reactive, onMounted } from 'vue'
 import { Search } from '@element-plus/icons-vue'
-import { reqOrganList, reqStudentInfo } from '@/api/schoolmgr/index'  //学生管理 在线
+import { reqOrganList, reqStudentInfo, reqOutLine } from '@/api/schoolmgr/index'  //学生管理 在线
+import type { TabsPaneContext } from 'element-plus'
 const selectValue = ref('')
+const selectClassValue = ref('')
+const selectGradeValue = ref('')
 const options = reactive([
   {
-    value: '是',
-    label: '是',
+    value: '1',
+    label: '男',
   },
   {
-    value: '否',
-    label: '否',
+    value: '2',
+    label: '女',
   },
 ])
 const activeName = ref('1')
@@ -90,32 +96,48 @@ const editableTabs = reactive([
     name: '2',
   }
 ])
-
-// const handleClick = (tab: TabsPaneContext, event: Event) => {
-//   console.log(tab, event)
-// }
-const tableData = reactive([])
-// // 在线学生 需要在请求拿到年级班级数据作为参数传入
+onMounted(() => {
+  getNowStudent()
+})
 // 定义班级列表变量
-const classInfo: Array<number> = reactive([1])
+const classInfo: Array<number> = reactive([])
 // 定义年级级列表变量
-const gradeInfo: Array<string> = reactive(['初2018级'])
+const gradeInfo: Array<string> = reactive([])
 reqOrganList().then(res => {
-  console.log('年级班级', res);
   classInfo.push(...res.data.classList)
   gradeInfo.push(...res.data.gradeList)
-  console.log(classInfo, gradeInfo);
 
 })
-// 定义入参
-const _param = {
-  beginTime: '2023-10-27', classIdsList: [1], commissionIdsList: [1], departmentIdsList: [1], educationIdsList: [1], endTime: '2023-10-27',
-  fileName: 'student', gradeIdsList: ['1'], keyword: '初2018级', majorIdsList: ['1'], pageNum: 1, pageSize: 3, schoolIdsList: [2], sex: 1, status: 1
+let tableStudentData: Array<any> = reactive([])
+let studentTotal: any = ref(0)
+const getNowStudent = () => {
+  // // 在线学生 需要在请求拿到年级班级数据作为参数传入  在校学生列表接口
+  reqStudentInfo({ pageNum: 1, pageSize: 50 }).then(res => {
+    if (res.data && res.data.list && res.data.list?.length > 0) {
+      tableStudentData.push(...res.data.list)
+    }
+    studentTotal.value = res.data.total
+  })
 }
-reqStudentInfo(_param).then(res => {
-  console.log(res, '在线学生');
+//在线学生 往届学生列表接口
+const getBefoStudent = () => {
+  reqOutLine({ pageNum: 1, pageSize: 50 }).then(res => {
+    if (res.data && res.data.list && res.data.list?.length > 0) {
+      // console.log(res);
+      tableStudentData.push(...res.data.list)
+    }
+    studentTotal.value = res.data.total
+  })
+}
 
-})
+const handleClick = (tab: TabsPaneContext) => {
+  console.log(tab.props.name)
+  if (tab.props.name == 2) {
+    getBefoStudent()
+  } else {
+    getNowStudent()
+  }
+}
 </script>
 
 <style lang="scss">
@@ -147,6 +169,10 @@ reqStudentInfo(_param).then(res => {
           padding-left: 2.5px;
           padding-right: 2.5px;
 
+          &.el-col-5 {
+            flex: none;
+          }
+
           .el-select .el-input .el-input__inner {
             font-size: 14px;
           }
@@ -161,10 +187,6 @@ reqStudentInfo(_param).then(res => {
             border-color: #091d7c !important;
             color: #fff;
 
-          }
-
-          &.el-col-5 .el-select.el-select--large {
-            width: 280px;
           }
 
           &.el-col-6 .el-input .el-input__inner {
@@ -199,21 +221,37 @@ reqStudentInfo(_param).then(res => {
         }
       }
 
-      // .showStudentList {
-      // .el-table--scrollable-x.el-table--scrollable-y {
-
-      //   overflow-y: scroll;
-      //   overflow-x: scroll;
-      // }
-
       .el-table {
 
         width: 100%;
         height: 564px;
         font-weight: 900;
-      }
 
-      // }
+        // 表头样式设置
+        .el-table__header thead tr>th.is-leaf.el-table__cell .cell {
+          overflow: hidden;
+          color: #a29faa !important;
+          height: 30px;
+          font-size: 14px !important;
+          // .el-table .cell
+          padding-left: 4px;
+        }
+
+        //表主体样式设置
+        .el-table__body-wrapper tbody tr td .cell {
+          font-size: 16px;
+          font-weight: bold;
+          color: #2d3037;
+        }
+
+        .el-table-column.dis-button button.el-button {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          padding: 0 4px;
+          font-size: 14px;
+        }
+      }
     }
 
     .el-tabs__header.is-top {

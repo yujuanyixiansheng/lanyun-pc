@@ -22,9 +22,22 @@ export const reqTeacherList = () => {
 export const reqOrganList = () => {
   return request.get<any, Organize>(API.ORGANIZE_STUDENT_URL)
 }
-//学生管理 在线学生列表  https://task.bluerhyme.net/sys/educationadmin/studentInfo/getStudentInfoList
+//学生管理 在线学生列表  https://task.bluerhyme.net/sys/educationadmin/studentInfo/getStudentInfoList 在校学生
 export const reqStudentInfo = (studentConditionDto: studentListForm) => {
   return request.post<any, studentInter>(API.ONLINE_STUDENT_URL, {
     ...studentConditionDto
+  })
+}
+
+//学生管理 在线学生列表  https://task.bluerhyme.net/sys/educationadmin/studentInfo/getFormerStuentInfoList 往届学生
+export const reqOutLine = ((data: studentListForm) => {
+  return request.post<any, studentInter>(API.OUTLINE_STUDENT_URL, {
+    ...data
+  })
+})
+//档案管理
+export const reqArchivesList = (data: studentListForm) => {
+  return request.post<any, studentInter>(API.ARCHIVE_STUDENT_URL, {
+    ...data
   })
 }

@@ -2,7 +2,7 @@
   <!-- 动态路由菜单 -->
   <div class="aside-menu">
     <el-menu active-text-color="#fff" background-color="#202a34" :default-active="item.url" text-color="#dde6fd"
-      v-for="(item, index) in menuList" :key="item.menuId">
+      v-for="(item, index) in  menuList " :key="item.menuId">
       <!-- :default-active="$route.path" -->
       <!-- 没有子路由 -->
       <el-menu-item v-if="item.children.length == 0" :index="item.url" @click="goRoute">
@@ -22,7 +22,8 @@
             </el-icon>
             <span>{{ item.children[0].displayName }}</span>
           </template>
-        </el-menu-item></template>
+        </el-menu-item>
+      </template>
       <!-- 有子路由 且个数大于一个 -->
       <el-sub-menu :index="item.url" v-if="item.children && item.children.length >= 2">
         <template #title>

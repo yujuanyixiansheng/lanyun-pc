@@ -35,11 +35,11 @@
           共查询结果 <span>{{ resTotal }}</span> 条
         </div>
         <div class="showList">
-          <el-table :data="tableData" style="width: 100%" cellspacing="0" cellpadding="0">
+          <el-table :data="tableTeachData" style="width: 100%" cellspacing="0" cellpadding="0">
             <el-table-column type="selection" width="70">
               <el-checkbox v-model="checked"></el-checkbox>
             </el-table-column>
-            <el-table-column prop="numindex" label="#" width="60" />
+            <el-table-column type="index" label="#" width="60" />
             <el-table-column prop="name" label="教师姓名" width="150" />
             <el-table-column prop="loginName" label="账号" width="150" />
             <el-table-column label="是否学校心理咨询师" width="150">
@@ -97,12 +97,12 @@ const options = [
 
 const input3 = ref('')
 
-const tableData: Array<object> = reactive([])
+let tableTeachData: Array<object> = reactive([])
 let resTotal: any = ref(0)
 reqTeacherList().then((res) => {
   if (res.data && res.data.list && res.data.list?.length > 0) {
-    tableData.push(...res.data.list)
-    // console.log(res)
+    // tableTeachData.push(...res.data.list)
+    tableTeachData.push(...res.data.list)
   }
   resTotal.value = res.data.total
 

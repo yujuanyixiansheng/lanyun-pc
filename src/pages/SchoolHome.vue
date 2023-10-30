@@ -2,12 +2,7 @@
 <template>
   <div class="home-main">
     <div class="card">
-      <div
-        class="card-item"
-        :style="`background:${item.background}`"
-        v-for="item in cardObj"
-        :key="item.name"
-      >
+      <div class="card-item" :style="`background:${item.background}`" v-for="item in cardObj" :key="item.name">
         <svg style="width: 48px; height: 48px">
           <use :xlink:href="`#icon-${item.icon}`" fill="#fff"></use>
         </svg>
@@ -24,8 +19,7 @@
         <p>
           <span style="color: #01058a; font-size: 36px; font-weight: bold">{{
             totalAlar
-          }}</span
-          >个
+          }}</span>个
         </p>
       </div>
       <div class="pie" ref="pieEchart"></div>
@@ -38,16 +32,11 @@
           全部<span>{{ scaleTotal }}</span>
         </div>
         <ul>
-          <li
-            v-for="item in scaleArr"
-            :key="item.classId"
-            style="list-style-type: none"
-          >
+          <li v-for="item in scaleArr" :key="item.classId" style="list-style-type: none">
             <span class="circle" :style="`background:${getColor()};`"></span>
             <span class="people">{{ item.className }}:</span>
             <span class="text_num" :style="`color:${getColor()};`">
-              {{ item.count }}</span
-            >
+              {{ item.count }}</span>
           </li>
         </ul>
       </div>
@@ -126,7 +115,6 @@ reqCardList().then((res) => {
 let totalAlar = ref(0)
 let pieData: Array<object> = reactive([])
 reqAlarmList().then((res) => {
-  console.log(res, 44444)
 
   if (res.data && res.data.statuses && res.data.statuses.length > 0) {
     pieData = res.data.statuses.map((item: any) => {
@@ -134,7 +122,6 @@ reqAlarmList().then((res) => {
     })
   }
   totalAlar.value = res.data.total
-  console.log(pieData, '饼图数据')
   pieEcha() //拿到饼图数据后调用饼图渲染方法
 })
 
@@ -381,6 +368,7 @@ reqIntroduceList().then((res) => {
 .home-main {
   height: 100%;
   margin-left: 10px;
+
   .card {
     display: flex;
     justify-content: space-evenly;
@@ -398,36 +386,44 @@ reqIntroduceList().then((res) => {
       color: #fff;
       box-shadow: 0 0 2px 2px hsla(0, 0%, 52.5%, 0.1);
       padding: 20px;
+
       svg {
         margin-right: 20px;
       }
+
       .text {
         span {
           font-size: 16px;
         }
+
         span:last-child {
           font-size: 32px;
         }
       }
     }
+
     .card-item:first-child {
       margin-left: 0;
     }
+
     .card-item:last-child {
       margin-right: 0;
     }
   }
+
   .echart {
     margin-top: 10px;
     height: 340px;
     border-radius: 10px;
     display: flex;
+    justify-content: space-between;
     box-shadow: 0 0 2px 2px hsla(0, 0%, 52.5%, 0.1);
     align-items: center;
     padding: 20px;
     background: #fff;
     color: #a29faa;
     margin-bottom: 20px;
+
     .alar-total {
       width: 200px;
       min-width: 180px;
@@ -438,16 +434,19 @@ reqIntroduceList().then((res) => {
       justify-content: center;
       align-items: center;
     }
+
     .pie {
-      min-width: 350px;
+      min-width: 400px;
       height: 300px;
       padding: 10px;
     }
+
     .bar {
-      min-width: 800px;
+      min-width: 1000px;
       height: 300px;
     }
   }
+
   .scale-class {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -458,10 +457,12 @@ reqIntroduceList().then((res) => {
     font-weight: bold;
     font-size: 16px;
     color: #111416;
+
     .statistics_total {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
       .total_left {
         color: #a29faa;
         height: 60px;
@@ -478,11 +479,13 @@ reqIntroduceList().then((res) => {
           font-weight: bold;
         }
       }
+
       ul {
         flex: 1;
         display: flex;
         flex: auto;
         flex-wrap: wrap;
+
         li {
           .circle {
             width: 14px;
@@ -491,12 +494,14 @@ reqIntroduceList().then((res) => {
             border-radius: 50%;
             margin-right: 5px;
           }
+
           .people {
             font-size: 14px;
             color: #687782;
             margin-right: 8px;
             font-weight: 400;
           }
+
           .text_num {
             margin-right: 28px;
             font-size: 16px;
@@ -505,6 +510,7 @@ reqIntroduceList().then((res) => {
       }
     }
   }
+
   .scale-introduce {
     margin: 20px 0 10px;
     padding: 20px;
@@ -514,6 +520,7 @@ reqIntroduceList().then((res) => {
     border-radius: 10px;
     box-shadow: 0 0 2px 2px hwb(0 10% 35% / 0.1);
     border-bottom: 1px solid hwb(0 10% 35% / 0.1);
+
     .title {
       width: 104px;
       padding-bottom: 10px;
@@ -523,29 +530,35 @@ reqIntroduceList().then((res) => {
       font-weight: 500;
       // margin: 20px;
     }
+
     .content {
       display: flex;
       justify-content: space-between;
+
       .scale-item {
         width: 33%;
         padding: 20px 30px;
+
         .scale-subtit {
           margin-bottom: 10px;
           font-size: 18px;
           color: #000;
           text-align: left;
         }
+
         .scaleIntro {
           margin-bottom: 10px;
           font-size: 15px;
           color: #898989;
           text-align: left;
           line-height: 30px;
+
           span {
             font-size: 15px;
             color: #409eff;
             cursor: pointer;
           }
+
           span:hover {
             color: #01058a;
           }
